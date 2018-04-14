@@ -1,4 +1,6 @@
-package com.kaparray.cryptaretrofit;
+package com.kaparray.cryptaretrofit.api;
+
+import com.kaparray.cryptaretrofit.data.Data;
 
 import java.util.List;
 

@@ -1,7 +1,9 @@
-package com.kaparray.cryptaretrofit;
+package com.kaparray.cryptaretrofit.data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 public class Data {
     @SerializedName("id")
