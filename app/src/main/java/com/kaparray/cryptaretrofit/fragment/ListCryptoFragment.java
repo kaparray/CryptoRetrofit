@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.github.glomadrian.loadingballs.BallView;
 import com.kaparray.cryptaretrofit.adapters.MyAdapter;
 import com.kaparray.cryptaretrofit.api.CryptoApi;
 import com.kaparray.cryptaretrofit.data.Data;
@@ -41,7 +42,7 @@ public class ListCryptoFragment extends Fragment {
 
     List<Data> userFromServer;
 
-    ProgressBar mProgress;
+    BallView mProgress;
 
     CryptoFragment cryptoFragment;
 
@@ -74,7 +75,7 @@ public class ListCryptoFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fr_listcryptafragment, container, false);
 
-        mProgress = rootView.findViewById(R.id.progressBar);
+        mProgress = rootView.findViewById(R.id.progressBar1);
 
         cryptoFragment = new CryptoFragment();
 
@@ -123,6 +124,7 @@ public class ListCryptoFragment extends Fragment {
             super.onPostExecute(result);
 
             if (userFromServer != null) {
+                mProgress.stop();
                 mProgress.setVisibility(View.GONE);
 
                 mRecyclerView = (RecyclerView) rootView.findViewById(R.id.my_recycler_view);

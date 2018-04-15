@@ -4,9 +4,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:lib="https://github.com/glomadrian/loading-balls"
+    tools:ignore="NamespaceTypo">
+
+
+    <com.github.glomadrian.loadingballs.BallView
+        android:id="@+id/progressBar3"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_gravity="center"
+        android:layout_margin="30dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        lib:path="triangle"
+        lib:max_ball_size="18dp"
+        lib:min_ball_size="5dp"
+        lib:ball_colors="@array/colors"
+        lib:balls="3"
+        lib:enable_size_animation="true"
+        lib:movement_cycle_time="1500"
+        lib:size_cycle_time="500" />
 
     <Spinner
+        android:visibility="gone"
         android:id="@+id/spinner_whence"
         android:layout_width="154dp"
         android:layout_height="46dp"
@@ -20,6 +47,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
+        android:visibility="gone"
         android:id="@+id/et_whenceCrypto"
         android:layout_width="165dp"
         android:layout_height="wrap_content"
@@ -33,6 +61,7 @@
 
 
     <Spinner
+        android:visibility="gone"
         android:id="@+id/spinner_where"
         android:layout_width="154dp"
         android:layout_height="46dp"
@@ -49,6 +78,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
+        android:visibility="gone"
         android:id="@+id/et_whereCrypto"
         android:layout_width="165dp"
         android:layout_height="wrap_content"
@@ -63,6 +93,7 @@
         app:layout_constraintVertical_bias="0.201" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

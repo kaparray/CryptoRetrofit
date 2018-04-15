@@ -14,7 +14,7 @@ import com.kaparray.cryptaretrofit.fragment.ListCryptoFragment;
 public class MainActivity extends AppCompatActivity {
 
     private ListCryptoFragment listCryptaFragment = new ListCryptoFragment();
-    private CryptoFragment cryptaFragment = new CryptoFragment();
+    private CryptoFragment cryptoFragment = new CryptoFragment();
     private ConverterFragment converterFragment = new ConverterFragment();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.github.glomadrian.loadingballs.BallView;
 import com.kaparray.cryptaretrofit.R;
 import com.kaparray.cryptaretrofit.api.CryptoOneApi;
 import com.kaparray.cryptaretrofit.data.Data;
@@ -28,19 +29,18 @@ public class CryptoFragment extends Fragment{
 
 
     List<Data> userFromServer;
-    ProgressBar mProgress;
-    TextView mText;
+    BallView mProgress;
     String id, name;
+
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fr_crypta, container, false);
 
-        mText = rootView.findViewById(R.id.tv_TextCrypto);
         mProgress = rootView.findViewById(R.id.progressBar2);
 
-        mText.setVisibility(View.GONE);
 
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -91,9 +91,8 @@ public class CryptoFragment extends Fragment{
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
+            mProgress.stop();
             mProgress.setVisibility(View.GONE);
-            mText.setVisibility(View.VISIBLE);
-            mText.setText(userFromServer.get(0).getName());
 
         }
     }

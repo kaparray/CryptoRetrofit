@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.glomadrian.loadingballs.BallView;
 import com.kaparray.cryptaretrofit.R;
 import com.kaparray.cryptaretrofit.adapters.MyAdapter;
 import com.kaparray.cryptaretrofit.adapters.RecyclerItemClickListener;
@@ -48,6 +49,7 @@ public class ConverterFragment extends Fragment implements AdapterView.OnItemSel
     Spinner mWhenceSpinner;
     Spinner mWhereSpinner;
 
+    BallView mProgress;
 
     List<Data> userFromServer;
 
@@ -61,6 +63,7 @@ public class ConverterFragment extends Fragment implements AdapterView.OnItemSel
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fr_converter, container, false);
 
+        mProgress = rootView.findViewById(R.id.progressBar3);
         mTextWhence = rootView.findViewById(R.id.et_whenceCrypto);
         mTextWhere = rootView.findViewById(R.id.et_whereCrypto);
         mWhereSpinner = rootView.findViewById(R.id.spinner_where);
@@ -142,6 +145,13 @@ public class ConverterFragment extends Fragment implements AdapterView.OnItemSel
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
+            mProgress.stop();
+            mProgress.setVisibility(View.GONE);
+
+            mWhenceSpinner.setVisibility(View.VISIBLE);
+            mWhereSpinner.setVisibility(View.VISIBLE);
+            mTextWhence.setVisibility(View.VISIBLE);
+            mTextWhere.setVisibility(View.VISIBLE);
 
             if (userFromServer != null) {
                 List<String> crypto = new ArrayList<>();
