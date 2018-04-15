@@ -6,10 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.kaparray.cryptaretrofit.R;
-import com.kaparray.cryptaretrofit.adapters.MyAdapter;
-import com.kaparray.cryptaretrofit.adapters.RecyclerItemClickListener;
-import com.kaparray.cryptaretrofit.api.CryptaApi;
-import com.kaparray.cryptaretrofit.api.CryptaOneApi;
+import com.kaparray.cryptaretrofit.api.CryptoOneApi;
 import com.kaparray.cryptaretrofit.data.Data;
 
 import java.io.IOException;
@@ -31,7 +24,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class CryptaFragment extends Fragment{
+public class CryptoFragment extends Fragment{
 
 
     List<Data> userFromServer;
@@ -44,7 +37,7 @@ public class CryptaFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fr_crypta, container, false);
 
-        mText = rootView.findViewById(R.id.tv_TextCrypta);
+        mText = rootView.findViewById(R.id.tv_TextCrypto);
         mProgress = rootView.findViewById(R.id.progressBar2);
 
         mText.setVisibility(View.GONE);
@@ -82,7 +75,7 @@ public class CryptaFragment extends Fragment{
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
-            CryptaOneApi messagesApi = retrofit.create(CryptaOneApi.class);
+            CryptoOneApi messagesApi = retrofit.create(CryptoOneApi.class);
             Call<List<Data>> call = messagesApi.cryptaOne(id);
 
 

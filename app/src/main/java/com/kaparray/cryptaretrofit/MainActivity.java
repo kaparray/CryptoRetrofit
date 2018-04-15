@@ -6,15 +6,16 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-import com.kaparray.cryptaretrofit.fragment.CryptaFragment;
-import com.kaparray.cryptaretrofit.fragment.ListCryptaFragment;
+import com.kaparray.cryptaretrofit.fragment.ConverterFragment;
+import com.kaparray.cryptaretrofit.fragment.CryptoFragment;
+import com.kaparray.cryptaretrofit.fragment.ListCryptoFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListCryptaFragment listCryptaFragment = new ListCryptaFragment();
-    private CryptaFragment cryptaFragment = new CryptaFragment();
+    private ListCryptoFragment listCryptaFragment = new ListCryptoFragment();
+    private CryptoFragment cryptaFragment = new CryptoFragment();
+    private ConverterFragment converterFragment = new ConverterFragment();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager()
                             .beginTransaction()
                             .setTransition( FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                            .replace(R.id.container, cryptaFragment)
+                            .replace(R.id.container, converterFragment)
                             .addToBackStack(null)
                             .commit();
                     return true;

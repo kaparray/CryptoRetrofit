@@ -6,10 +6,11 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface CryptaApi {
+public interface CryptoOneApi {
 
-    @GET("ticker/?convert=EUR")
-    Call<List<Data>> cryptaList(@Query("start") String start, @Query("limit") String limit);
+    @GET("ticker/{id}/")
+    Call<List<Data>> cryptaOne(@Path("id") String id);
 }
