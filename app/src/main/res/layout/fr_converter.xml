@@ -35,7 +35,7 @@
     <Spinner
         android:visibility="gone"
         android:id="@+id/spinner_whence"
-        android:layout_width="154dp"
+        android:layout_width="150dp"
         android:layout_height="46dp"
         android:layout_marginEnd="28dp"
         android:layout_marginStart="8dp"
@@ -49,7 +49,7 @@
     <EditText
         android:visibility="gone"
         android:id="@+id/et_whenceCrypto"
-        android:layout_width="165dp"
+        android:layout_width="122dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="144dp"
@@ -63,11 +63,11 @@
     <Spinner
         android:visibility="gone"
         android:id="@+id/spinner_where"
-        android:layout_width="154dp"
+        android:layout_width="150dp"
         android:layout_height="46dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="28dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +80,7 @@
     <EditText
         android:visibility="gone"
         android:id="@+id/et_whereCrypto"
-        android:layout_width="165dp"
+        android:layout_width="122dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="36dp"

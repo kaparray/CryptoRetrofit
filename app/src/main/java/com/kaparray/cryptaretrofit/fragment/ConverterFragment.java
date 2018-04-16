@@ -44,6 +44,7 @@ public class ConverterFragment extends Fragment implements AdapterView.OnItemSel
 
     EditText mTextWhence;
     EditText mTextWhere;
+    TextView mEq;
 
 
     Spinner mWhenceSpinner;
@@ -68,6 +69,7 @@ public class ConverterFragment extends Fragment implements AdapterView.OnItemSel
         mTextWhere = rootView.findViewById(R.id.et_whereCrypto);
         mWhereSpinner = rootView.findViewById(R.id.spinner_where);
         mWhenceSpinner = rootView.findViewById(R.id.spinner_whence);
+        mEq = rootView.findViewById(R.id.textView3);
 
 
         mWhenceSpinner.setOnItemSelectedListener(this);
@@ -152,6 +154,7 @@ public class ConverterFragment extends Fragment implements AdapterView.OnItemSel
             mWhereSpinner.setVisibility(View.VISIBLE);
             mTextWhence.setVisibility(View.VISIBLE);
             mTextWhere.setVisibility(View.VISIBLE);
+            mEq.setVisibility(View.VISIBLE);
 
             if (userFromServer != null) {
                 List<String> crypto = new ArrayList<>();

@@ -113,7 +113,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public void setPhoto(String Symbol){
             ImageView imageView = mView.findViewById(R.id.iv_Crypto);
 
-
+            // Set icon for crypto currency
             if(Symbol.equals("ABT")){
                 imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.abt));
             }else if (Symbol.equals("ACT")){
@@ -740,7 +740,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.zrx));
             }else{
                 imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_launcher_round));
-
             }
         }
 
