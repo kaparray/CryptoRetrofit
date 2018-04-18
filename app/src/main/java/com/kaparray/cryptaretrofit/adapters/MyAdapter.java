@@ -102,12 +102,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
 
         public void setPrice7d(String Price){
-            TextView price = mView.findViewById(R.id.price1d);
-            price.setText(Price + "%");
+            TextView price = mView.findViewById(R.id.price7d);
+            if(Price != null) {
+                price.setText(Price + "%");
+
+
+                if (Price.charAt(0) == '-')
+                    price.setTextColor(context.getResources().getColor(R.color.Red));
+                else price.setTextColor(context.getResources().getColor(R.color.Green));
+            }
+            else {
+                price.setText("None data");
+            }
             TextView h = mView.findViewById(R.id.d7);
             h.setText("7D");
-            if (Price.charAt(0) == '-') price.setTextColor(context.getResources().getColor(R.color.Red));
-            else price.setTextColor(context.getResources().getColor(R.color.Green));
         }
 
         public void setPhoto(String Symbol){

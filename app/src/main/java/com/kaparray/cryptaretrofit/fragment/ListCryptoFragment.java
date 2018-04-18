@@ -19,6 +19,7 @@ import android.support.v7.view.menu.ActionMenuItemView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -58,6 +59,9 @@ public class ListCryptoFragment extends Fragment{
 
     Toolbar myToolbar;
     View rootView;
+    String len;
+
+
 
 
     public static boolean hasConnection(final Context context)
@@ -107,12 +111,16 @@ public class ListCryptoFragment extends Fragment{
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 new MyTask(numberPicker.getValue()+"").execute();
+
+                                Bundle bundle = new Bundle();
+                                bundle.putString("len", numberPicker.getValue()+"");
+                                setArguments(bundle);
                             }
                         })
                         .show();
                 return true;
             case R.id.settings:
-                new MyTask("100").execute();
+                // To Do
                 return true;
 
 
@@ -135,6 +143,13 @@ public class ListCryptoFragment extends Fragment{
         // Set menu in fragment
         setHasOptionsMenu(true);
 
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            len = bundle.getString("len");
+            Log.d("000000000", len);
+        }
+
+
 
         mProgress = rootView.findViewById(R.id.progressBar1);
 
@@ -147,13 +162,20 @@ public class ListCryptoFragment extends Fragment{
 
 
         if(hasConnection(getContext())) {
-            new MyTask("100").execute();
+            if(len != null){
+                new MyTask(len).execute();
+            }else {
+                new MyTask("100").execute();
+            }
         }else{
             Toast.makeText(getActivity(), "NO INTERNET CONECTION", Toast.LENGTH_LONG).show();
         }
 
+
         return rootView;
     }
+
+
 
 
     class MyTask extends AsyncTask<Void, Void, Void> {

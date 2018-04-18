@@ -71,7 +71,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
             android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/price1d"
+            app:layout_constraintBottom_toTopOf="@+id/price7d"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.900"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +79,7 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
-            android:id="@+id/price1d"
+            android:id="@+id/price7d"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
@@ -161,7 +161,7 @@
             android:textColor="@color/Black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.185"
-            app:layout_constraintStart_toEndOf="@+id/price1d"
+            app:layout_constraintStart_toEndOf="@+id/price7d"
             app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
