@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
                             .addToBackStack(null)
                             .commit();
                     return true;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_converter:
                     getSupportFragmentManager()
                             .beginTransaction()
                             .setTransition( FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                             .addToBackStack(null)
                             .commit();
                     return true;
-                case R.id.navigation_notifications:
+                case R.id.navigation_settings:
 
                     return true;
             }

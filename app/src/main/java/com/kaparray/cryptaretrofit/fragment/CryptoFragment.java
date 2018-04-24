@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -81,66 +82,54 @@ public class CryptoFragment extends Fragment{
 
 
 
-        new MyTask().execute();
+        setCryptoData();
 
         return rootView;
     }
 
 
+    void setCryptoData(){
 
-    class MyTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.coinmarketcap.com/v1/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        }
+        CryptoOneApi messagesApi = retrofit.create(CryptoOneApi.class);
+        Call<List<Data>> call = messagesApi.cryptaOne(id);
+        call.enqueue(new Callback<List<Data>>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call<List<Data>> call, Response<List<Data>> response) {
+                userFromServer = response.body();
+
+                mProgress.setVisibility(View.GONE);
+                setIcon(userFromServer.get(0).getSymbol());
+                mNameText.setText(userFromServer.get(0).getName()); // Set Icon
+                mPriceUSD.setText("Price USD:  " + userFromServer.get(0).getPriceUsd() + "$");
+                mPriceBTC.setText("Price BTC:  " + userFromServer.get(0).getPriceBtc() + " BTC");
+                mVolume24h.setText("Volume USD behind 24h:  " + userFromServer.get(0).get24hVolumeUsd() + "$");
+                mMarketCap.setText("Market cap USD:  " + userFromServer.get(0).getMarketCapUsd() + "$");
+                mAvailableSupply.setText("Available supply:  " + userFromServer.get(0).getAvailableSupply() + "$");
+                mTotalSupply.setText("Total supply:  " + userFromServer.get(0).getTotalSupply() + "$");
+                mPercent1h.setText("Percent change 1h:  " + userFromServer.get(0).getPercentChange1h() + "%");
+                mPercent24h.setText("Percent change 24h:  " + userFromServer.get(0).getPercentChange24h() + "%");
+                mPercent7d.setText("Percent change 7d:  " + userFromServer.get(0).getPercentChange7d() + "%");
 
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-
-
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("https://api.coinmarketcap.com/v1/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            CryptoOneApi messagesApi = retrofit.create(CryptoOneApi.class);
-            Call<List<Data>> call = messagesApi.cryptaOne(id);
-
-
-            try {
-                Response<List<Data>> userResponse = call.execute();
-                userFromServer = userResponse.body();
-            } catch (IOException e) {
-                e.printStackTrace();
+                cardViewTitle.setVisibility(View.VISIBLE);
+                cardViewData.setVisibility(View.VISIBLE);
             }
-            return null;
-        }
-        @SuppressLint("SetTextI18n")
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-            mProgress.setVisibility(View.GONE);
-            setIcon(userFromServer.get(0).getSymbol());
-            mNameText.setText(userFromServer.get(0).getName()); // Set Icon
-            mPriceUSD.setText("Price USD:  " + userFromServer.get(0).getPriceUsd() + "$");
-            mPriceBTC.setText("Price BTC:  " + userFromServer.get(0).getPriceBtc() + " BTC");
-            mVolume24h.setText("Volume USD behind 24h:  " + userFromServer.get(0).get24hVolumeUsd() + "$");
-            mMarketCap.setText("Market cap USD:  " + userFromServer.get(0).getMarketCapUsd() + "$");
-            mAvailableSupply.setText("Available supply:  " + userFromServer.get(0).getAvailableSupply() + "$");
-            mTotalSupply.setText("Total supply:  " + userFromServer.get(0).getTotalSupply() + "$");
-            mPercent1h.setText("Percent change 1h:  " + userFromServer.get(0).getPercentChange1h() + "%");
-            mPercent24h.setText("Percent change 24h:  " + userFromServer.get(0).getPercentChange24h() + "%");
-            mPercent7d.setText("Percent change 7d:  " + userFromServer.get(0).getPercentChange7d() + "%");
 
+            @Override
+            public void onFailure(Call<List<Data>> call, Throwable t) {
 
-            cardViewTitle.setVisibility(View.VISIBLE);
-            cardViewData.setVisibility(View.VISIBLE);
-
-        }
+            }
+        });
     }
+
+
+
 
 
     @Override

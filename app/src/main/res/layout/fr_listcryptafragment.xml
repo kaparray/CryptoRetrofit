@@ -17,6 +17,8 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
+
+
     <com.github.glomadrian.loadingballs.BallView
         android:id="@+id/progressBar1"
         android:layout_width="96dp"

@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -75,7 +76,7 @@ public class ConverterFragment extends Fragment implements AdapterView.OnItemSel
         mWhenceSpinner.setOnItemSelectedListener(this);
         mWhereSpinner.setOnItemSelectedListener(this);
 
-        new MyTask().execute();
+        getCryptoСourse();
 
 
 
@@ -111,69 +112,62 @@ public class ConverterFragment extends Fragment implements AdapterView.OnItemSel
         mTextWhere.setText(((whence * Double.parseDouble(mTextWhence.getText().toString())) / where ) + "");
     }
 
-    public void onNothingSelected(AdapterView<?> arg0) {
-        // TODO Auto-generated method stub
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        
     }
 
 
-    class MyTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
+
+    void getCryptoСourse(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.coinmarketcap.com/v1/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        CryptoApi messagesApi = retrofit.create(CryptoApi.class);
+        Call<List<Data>> call = messagesApi.cryptaList("0", "100");
+
+        call.enqueue(new Callback<List<Data>>() {
+            @Override
+            public void onResponse(Call<List<Data>> call, Response<List<Data>> response) {
+                userFromServer = response.body();
+
+                mProgress.stop();
+                mProgress.setVisibility(View.GONE);
+
+                mWhenceSpinner.setVisibility(View.VISIBLE);
+                mWhereSpinner.setVisibility(View.VISIBLE);
+                mTextWhence.setVisibility(View.VISIBLE);
+                mTextWhere.setVisibility(View.VISIBLE);
+                mEq.setVisibility(View.VISIBLE);
+
+                if (userFromServer != null) {
+                    List<String> crypto = new ArrayList<>();
+
+                    for (int i = 0; i < userFromServer.size(); i++) {
+                        crypto.add(userFromServer.get(i).getName());
+                    }
 
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("https://api.coinmarketcap.com/v1/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            CryptoApi messagesApi = retrofit.create(CryptoApi.class);
-            Call<List<Data>> call = messagesApi.cryptaList("0", "100");
+                    ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, crypto);
 
 
-            try {
-                Response<List<Data>> userResponse = call.execute();
-                userFromServer = userResponse.body();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
+                    mWhenceSpinner.setAdapter(dataAdapter);
+                    mWhereSpinner.setAdapter(dataAdapter);
 
-        @SuppressLint("SetTextI18n")
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-            mProgress.stop();
-            mProgress.setVisibility(View.GONE);
-
-            mWhenceSpinner.setVisibility(View.VISIBLE);
-            mWhereSpinner.setVisibility(View.VISIBLE);
-            mTextWhence.setVisibility(View.VISIBLE);
-            mTextWhere.setVisibility(View.VISIBLE);
-            mEq.setVisibility(View.VISIBLE);
-
-            if (userFromServer != null) {
-                List<String> crypto = new ArrayList<>();
-
-                for (int i = 0; i < userFromServer.size(); i++) {
-                    crypto.add(userFromServer.get(i).getName());
                 }
 
-
-                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, crypto);
-
-
-                mWhenceSpinner.setAdapter(dataAdapter);
-                mWhereSpinner.setAdapter(dataAdapter);
-
-
-            } else {
-                // Set textView in center and set text in error
             }
-        }
+
+            @Override
+            public void onFailure(Call<List<Data>> call, Throwable t) {
+
+            }
+        });
     }
+
+
+
+
 }
